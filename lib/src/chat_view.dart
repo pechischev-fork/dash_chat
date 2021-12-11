@@ -278,7 +278,7 @@ class DashChat extends StatefulWidget {
 
   late ScrollToBottomStyle scrollToBottomStyle;
 
-  final Future onRefresh;
+  final Function onRefresh;
 
   DashChat({
     Key? key,
