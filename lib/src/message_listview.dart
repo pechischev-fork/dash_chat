@@ -94,7 +94,7 @@ class _MessageListViewState extends State<MessageListView> {
       if (widget.visible!) {
         widget.changeVisible!(false);
       }
-    } else if ((scrollNotification.metrics.pixels - bottom).abs() > 100) {
+    } else if ((scrollNotification.metrics.pixels - bottom) > 100) {
       if (!widget.visible!) {
         widget.changeVisible!(true);
       }
@@ -137,9 +137,10 @@ class _MessageListViewState extends State<MessageListView> {
               children: [
                 SmartRefresher(
                   onRefresh: () => {
-                    widget.onRefresh,
-                    Future.delayed(Duration(seconds: 1)),
-                    _refreshController.loadComplete(),
+                    widget.onRefresh(context),
+                    Future.delayed(Duration(seconds: 1), () {
+                      _refreshController.refreshCompleted();
+                    }),
                   },
                   controller: _refreshController,
                   child: ListView.builder(
