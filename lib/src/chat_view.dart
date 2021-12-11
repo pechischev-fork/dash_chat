@@ -278,7 +278,7 @@ class DashChat extends StatefulWidget {
 
   late ScrollToBottomStyle scrollToBottomStyle;
 
-  final Function onLoading;
+  final Future onRefresh;
 
   DashChat({
     Key? key,
@@ -357,7 +357,7 @@ class DashChat extends StatefulWidget {
     this.textBeforeImage = true,
     this.messageDecorationBuilder,
     this.canSend = false,
-    required this.onLoading,
+    required this.onRefresh,
   }) : super(key: key) {
     this.scrollToBottomStyle = scrollToBottomStyle ?? new ScrollToBottomStyle();
   }
@@ -522,7 +522,7 @@ class DashChatState extends State<DashChat> {
                       messageButtonsBuilder: widget.messageButtonsBuilder,
                       messageDecorationBuilder:
                           widget.messageDecorationBuilder,
-                    onLoading: widget.onLoading,
+                    onRefresh: widget.onRefresh,
                   ),
                   if (widget.messages.length != 0 &&
                       widget.messages.last.user.uid != widget.user.uid &&

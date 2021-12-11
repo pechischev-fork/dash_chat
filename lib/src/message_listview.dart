@@ -36,7 +36,7 @@ class MessageListView extends StatefulWidget {
   final bool textBeforeImage;
   final double? avatarMaxSize;
   final BoxDecoration Function(ChatMessage, bool?)? messageDecorationBuilder;
-  final Function onLoading;
+  final Future onRefresh;
 
   MessageListView({
     this.showLoadEarlierWidget,
@@ -75,7 +75,7 @@ class MessageListView extends StatefulWidget {
     this.messagePadding = const EdgeInsets.all(8.0),
     this.textBeforeImage = true,
     this.messageDecorationBuilder,
-    required this.onLoading,
+    required this.onRefresh,
   });
 
   @override
@@ -136,8 +136,8 @@ class _MessageListViewState extends State<MessageListView> {
               alignment: AlignmentDirectional.topCenter,
               children: [
                 SmartRefresher(
-                  onLoading: () => {
-                    widget.onLoading(),
+                  onRefresh: () async => {
+                    await widget.onRefresh,
                     _refreshController.loadComplete(),
                   },
                   controller: _refreshController,
